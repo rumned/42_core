@@ -3,37 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mobin-mu <mobin-mu@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: zyeoh <zyeoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 19:17:34 by mobin-mu          #+#    #+#             */
-/*   Updated: 2024/01/02 03:24:22 by mobin-mu         ###   ########.fr       */
+/*   Created: 2023/10/16 16:20:31 by zyeoh             #+#    #+#             */
+/*   Updated: 2023/10/20 15:33:36 by zyeoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
+	char	*destptr;
+	char	*srcptr;
 	size_t	i;
 
-	i = 0;
-	if (dst == NULL && src == NULL)
+	if (!dest && !src)
 		return (NULL);
-	if (dst > src)
+	destptr = (char *)dest;
+	srcptr = (char *)src;
+	i = -1;
+	if (dest > src)
 	{
-		while (len > 0)
-		{
-			((unsigned char *)dst)[len - 1] = ((unsigned char *)src)[len - 1];
-			len--;
-		}
+		while (n-- > 0)
+			destptr[n] = srcptr[n];
 	}
 	else
 	{
-		while (i < len)
-		{
-			((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
-			i++;
-		}
+		while (++i < n)
+			destptr[i] = srcptr[i];
 	}
-	return (dst);
+	return (dest);
 }

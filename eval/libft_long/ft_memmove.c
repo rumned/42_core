@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mobin-mu <mobin-mu@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: long <long@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 19:17:34 by mobin-mu          #+#    #+#             */
-/*   Updated: 2024/01/02 03:24:22 by mobin-mu         ###   ########.fr       */
+/*   Created: 2023/10/16 22:42:59 by long              #+#    #+#             */
+/*   Updated: 2023/10/20 16:51:45 by long             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,41 @@
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	size_t	i;
+	char	*d;
+	char	*s;
 
-	i = 0;
-	if (dst == NULL && src == NULL)
+	if (!dst && !src)
 		return (NULL);
-	if (dst > src)
+	d = (char *)dst;
+	s = (char *)src;
+	i = 0;
+	if (s > d)
 	{
-		while (len > 0)
+		while (i < len)
 		{
-			((unsigned char *)dst)[len - 1] = ((unsigned char *)src)[len - 1];
-			len--;
+			d[i] = s[i];
+			i++;
 		}
 	}
 	else
 	{
-		while (i < len)
-		{
-			((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
-			i++;
-		}
+		while (len--)
+			d[len] = s[len];
 	}
 	return (dst);
 }
+/*
+int	main(void)
+{
+	char	str[100] = "Learningisfun";
+
+	char *first, *second;
+	first = str;
+	second = str;
+	printf("Original string: %s\n", str);
+	// when overlap it start from first position
+	memmove(second + 8, first, 10);
+	printf("memmove overlap: %s\n", str);
+	return (0);
+}
+*/
