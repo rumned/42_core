@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mobin-mu <mobin-mu@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 13:55:29 by mobin-mu          #+#    #+#             */
-/*   Updated: 2024/06/06 19:24:07 by mobin-mu         ###   ########.fr       */
+/*   Updated: 2024/06/06 19:51:11 by mobin-mu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
-	static char	*record = NULL;
+	static char	*record[OPEN_MAX];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	record = read_based_on_buff(fd, record);
-	if (!record)
-		return (record);
-	line = find_complete_line(record);
-	record = remove_returned_line(record);
+	record[fd] = read_based_on_buff(fd, record[fd]);
+	if (!record[fd])
+		return (NULL);
+	line = find_complete_line(record[fd]);
+	record[fd] = remove_returned_line(record[fd]);
 	return (line);
 }
 
